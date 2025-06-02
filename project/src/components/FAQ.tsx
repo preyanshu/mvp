@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 // @ts-expect-error   lodfkgoirtigrfjbg
 import Faq from 'react-faq-component';
-import { motion, useInView } from 'framer-motion';
+// import { motion, useInView } from 'framer-motion';
 
 const data = {
   title: "",
@@ -58,7 +58,7 @@ const config = {
 
 const FAQ: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  // const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   return (
     <section
@@ -74,10 +74,9 @@ const FAQ: React.FC = () => {
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+        <div
+     
+    
           className="text-center mb-14"
         >
           <div className="inline-block px-4 py-1.5 rounded-full bg-gray-800 text-blue-400 font-semibold text-sm mb-4">
@@ -89,17 +88,15 @@ const FAQ: React.FC = () => {
           <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto">
             Everything you need to know about ChainPay and how it works.
           </p>
-        </motion.div>
+        </div>
 
         {/* FAQ List */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div
+        
           className=" bg-dark-200 rounded-3xl p-8 md:p-10 border border-white/10 shadow-xl transition-all duration-300"
         >
           <Faq data={data} styles={styles} config={config} />
-        </motion.div>
+        </div>
       </div>
     </section>
   );
