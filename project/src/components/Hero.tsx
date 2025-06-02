@@ -57,14 +57,7 @@ const Hero: React.FC = () => {
       className="relative min-h-screen flex items-center justify-center px-6 pt-24 overflow-hidden"
       id="home"
     >
-      <motion.div
-        style={{ y, opacity }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary-500/20 rounded-full filter blur-3xl" />
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent-500/20 rounded-full filter blur-3xl" />
-      </motion.div>
-
+     
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div

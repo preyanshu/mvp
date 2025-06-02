@@ -19,10 +19,7 @@ const Footer: React.FC = () => {
       transition={{ duration: 0.7, ease: 'easeOut' }}
       className="bg-dark-300 border-t border-dark-400 pt-12 pb-8 px-6 relative overflow-hidden"
     >
-      <div className="absolute inset-0 pointer-events-none opacity-30">
-        <div className="absolute bottom-0 left-1/4 w-48 h-48 bg-primary-500/10 rounded-full filter blur-3xl" />
-        <div className="absolute top-0 right-1/4 w-48 h-48 bg-accent-500/10 rounded-full filter blur-3xl" />
-      </div>
+     
 
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
         <motion.div

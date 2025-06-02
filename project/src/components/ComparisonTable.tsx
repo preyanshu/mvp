@@ -110,10 +110,10 @@ const ComparisonTable: React.FC = () => {
       className="py-24 px-6 relative overflow-hidden"
     >
       {/* Background Blur Circles */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
-      </div>
+      </div> */}
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Heading */}

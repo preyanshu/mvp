@@ -31,10 +31,10 @@ const WaitlistForm: React.FC = () => {
       className="py-24 px-6 relative overflow-hidden"
       aria-label="Join the waitlist section"
     >
-      <div className="absolute inset-0 pointer-events-none">
+      {/* <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-primary-500/10 rounded-full filter blur-3xl" />
         <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-accent-500/10 rounded-full filter blur-3xl" />
-      </div>
+      </div> */}
 
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div

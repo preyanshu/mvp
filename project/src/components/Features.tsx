@@ -110,10 +110,7 @@ const Features: React.FC = () => {
 
   return (
     <section id="features" className="py-24 px-6 relative overflow-hidden" ref={sectionRef}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary-500/10 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-accent-500/10 rounded-full filter blur-3xl" />
-      </div>
+    
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
