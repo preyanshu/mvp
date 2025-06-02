@@ -42,16 +42,22 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
 
       <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div
-            key="content"
-            initial={{ height: 0 }}
-            animate={{ height: 'auto' }}
-            exit={{ height: 0}}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden will-change-transform"
-          >
-            <p className="pb-5 text-gray-400">{answer}</p>
-          </motion.div>
+         <motion.div
+         key="content"
+         initial={{ height: 0 }}
+         animate={{ height: 'auto'}}
+         exit={{ height: 0 }}
+         transition={{
+           height: { duration: 0.2, ease: 'easeInOut' }
+         }}
+         className="overflow-hidden"
+         style={{
+           willChange: 'height',
+         }}
+       >
+         <p className="pb-5 text-gray-400">{answer}</p>
+       </motion.div>
+       
         )}
       </AnimatePresence>
     </motion.div>
