@@ -21,11 +21,11 @@ export const LandingPage: React.FC = () => {
         
         <main>
           
-            {/* <Hero /> */}
-            {/* <Features /> */}
-            {/* <ComparisonTable /> */}
+            <Hero />
+            <Features />
+            <ComparisonTable />/
             <FAQ />
-            {/* <WaitlistForm /> */}
+            <WaitlistForm />
 
         </main>
         
