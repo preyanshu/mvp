@@ -74,8 +74,6 @@ const Header: React.FC = () => {
 
         {/* Mobile Menu Button */}
         <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
@@ -89,15 +87,14 @@ const Header: React.FC = () => {
       <AnimatePresence>
   {isOpen && (
     <motion.div
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: 'auto' }}
+      initial={{  height: 0 }}
+      animate={{  height: 'auto' }}
       exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.3 }}
       className="md:hidden mt-4 rounded-lg overflow-hidden"
       style={{
-        backgroundColor,
-        backdropFilter,
-        WebkitBackdropFilter: backdropFilter, // for Safari support
+        backgroundColor : "rgba(18, 18, 18)"
+    
       }}
     >
       <div className="px-4 py-4 flex flex-col space-y-4">

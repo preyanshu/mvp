@@ -1,6 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return isMobile;
+};
 
 interface FAQItemProps {
   question: string;
@@ -8,19 +21,19 @@ interface FAQItemProps {
   isOpen: boolean;
   onToggle: () => void;
   index: number;
+  isMobile: boolean;
 }
 
-const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, index }) => {
+const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, index, isMobile }) => {
   const itemRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(itemRef, { once: true, margin: "-50px" });
 
   return (
     <motion.div
       ref={itemRef}
-      style={{ willChange: 'transform, opacity' }}
-      initial={{ opacity: 0, y: 20 }}
+      initial={isMobile ? false : { opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
+      transition={isMobile ? {} : { duration: 0.4, delay: index * 0.08 }}
       className="border-b border-dark-400 last:border-none"
     >
       <button
@@ -31,9 +44,8 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
           {question}
         </span>
         <motion.div
-          style={{ willChange: 'transform' }}
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          animate={isMobile ? {} : { rotate: isOpen ? 45 : 0 }}
+          transition={isMobile ? {} : { type: 'spring', stiffness: 300, damping: 20 }}
           className="text-primary-400 flex-shrink-0 ml-4"
         >
           {isOpen ? <Minus size={20} /> : <Plus size={20} />}
@@ -44,11 +56,11 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
         {isOpen && (
           <motion.div
             key="content"
-            initial={{ height: 0, opacity: 0 }}
+            initial={isMobile ? false : { height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden will-change-transform"
+            exit={isMobile ? {} : { height: 0, opacity: 0 }}
+            transition={isMobile ? {} : { duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
           >
             <p className="pb-5 text-gray-400">{answer}</p>
           </motion.div>
@@ -62,6 +74,7 @@ const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const isMobile = useIsMobile();
 
   const faqs = [
     {
@@ -101,10 +114,9 @@ const FAQ: React.FC = () => {
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Heading */}
         <motion.div
-          style={{ willChange: 'transform, opacity' }}
-          initial={{ opacity: 0, y: 20 }}
+          initial={isMobile ? false : { opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={isMobile ? {} : { duration: 0.5 }}
           className="text-center mb-14"
         >
           <div className="inline-block px-4 py-2 rounded-full bg-dark-300 text-primary-300 font-medium text-sm mb-3">
@@ -120,10 +132,9 @@ const FAQ: React.FC = () => {
 
         {/* FAQ List */}
         <motion.div
-          style={{ willChange: 'transform, opacity' }}
-          initial={{ opacity: 0 }}
+          initial={isMobile ? false : { opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={isMobile ? {} : { duration: 0.5, delay: 0.2 }}
           className="bg-dark-200 rounded-2xl p-8 border border-dark-300"
         >
           {faqs.map((faq, index) => (
@@ -134,6 +145,7 @@ const FAQ: React.FC = () => {
               isOpen={openIndex === index}
               onToggle={() => setOpenIndex(openIndex === index ? null : index)}
               index={index}
+              isMobile={isMobile}
             />
           ))}
         </motion.div>

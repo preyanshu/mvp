@@ -3,23 +3,33 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const CustomCursor: React.FC = () => {
   const [isPointer, setIsPointer] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
+  const useIsMobile = () => {
+    const [isMobile, setIsMobile] = useState(false);
+  
+    useEffect(() => {
+      const checkMobile = () => setIsMobile(window.innerWidth < 768);
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+      return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+  
+    return isMobile;
+  };
 
   const springConfig = { damping: 18, stiffness: 250 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
+  const isMobile = useIsMobile()
+
   useEffect(() => {
-    const isMobileDevice = () =>
-      typeof window !== 'undefined' &&
-      ('ontouchstart' in window || window.innerWidth < 768);
+   
 
-    setIsMobile(isMobileDevice());
-
-    if (isMobileDevice()) return; // Skip cursor setup on mobile
+    if (isMobile) return; // Skip cursor setup on mobile
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
