@@ -14,8 +14,8 @@ const Footer: React.FC = () => {
 
   return (
     <motion.footer
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{  y: 40 }}
+      animate={{  y: 0 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
       className="bg-dark-300 border-t border-dark-400 pt-12 pb-8 px-6 relative overflow-hidden"
     >
@@ -26,8 +26,8 @@ const Footer: React.FC = () => {
 
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{  y: 20 }}
+          animate={{  y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center md:text-left"
         >
@@ -40,8 +40,8 @@ const Footer: React.FC = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{  y: 20 }}
+          animate={{  y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex space-x-6"
         >
@@ -63,8 +63,7 @@ const Footer: React.FC = () => {
       </div>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+       
         transition={{ duration: 0.7, delay: 0.6 }}
         className="mt-10 text-center text-gray-500 text-sm select-none"
       >

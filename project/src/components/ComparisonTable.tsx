@@ -118,30 +118,28 @@ const ComparisonTable: React.FC = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
           <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            initial={{  y: 10 }}
+            animate={isInView ? {  y: 0 } : {  y: 10 }}
             transition={{ duration: 0.4 }}
             className="inline-block px-4 py-2 rounded-full bg-dark-300 text-primary-300 font-medium text-sm mb-4"
           >
             Why Choose Us
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            initial={{  y: 10 }}
+            animate={isInView ? { y: 0 } : { y: 10 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
           >
             How We Compare
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            initial={{  y: 10 }}
+            animate={isInView ? {  y: 0 } : {  y: 10 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-gray-400 max-w-2xl mx-auto"
           >
@@ -157,8 +155,8 @@ const ComparisonTable: React.FC = () => {
             animate={isInView ? 'visible' : 'hidden'}
             className="min-w-max"
 
-            initial={{ opacity: 0, scale: 0.9 }}
-  whileInView={{ opacity: 1, scale: 1 }}
+            initial={{scale: 0.9 }}
+  whileInView={{ scale: 1 }}
   viewport={{ once: true, amount: 0.2 }}
   transition={{ duration: 0.6, ease: 'easeOut' }}
   // className="min-w-max"

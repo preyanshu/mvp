@@ -38,31 +38,31 @@ const WaitlistForm: React.FC = () => {
 
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : undefined}
+          initial={{ y: 30 }}
+          animate={isInView ? {  y: 0 } : undefined}
           transition={{ duration: 0.6 }}
           className="bg-dark-200 rounded-2xl p-8 md:p-12 border border-dark-300 shadow-2xl"
         >
           <div className="text-center mb-8">
             <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              initial={{  y: 20 }}
+              animate={isInView ? {  y: 0 } : undefined}
               transition={{ duration: 0.5 }}
               className="inline-block px-4 py-2 rounded-full bg-dark-300 text-primary-300 font-medium text-sm mb-4"
             >
               Early Access
             </motion.span>
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              initial={{  y: 20 }}
+              animate={isInView ? {  y: 0 } : undefined}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
             >
               Join the Waitlist
             </motion.h2>
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              initial={{ y: 20 }}
+              animate={isInView ? {  y: 0 } : undefined}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-gray-400 max-w-2xl mx-auto"
             >
@@ -117,8 +117,8 @@ const WaitlistForm: React.FC = () => {
                 </>
               ) : (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ scale: 0.9 }}
+                  animate={{  scale: 1 }}
                   className="w-full px-6 py-4 rounded-full bg-dark-300 border border-primary-500 text-white flex items-center justify-center"
                   role="alert"
                 >
