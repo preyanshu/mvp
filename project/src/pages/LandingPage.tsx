@@ -20,17 +20,13 @@ export const LandingPage: React.FC = () => {
         <Header />
         
         <main>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
+          
             <Hero />
             <Features />
             <ComparisonTable />
             <FAQ />
             <WaitlistForm />
-          </motion.div>
+
         </main>
         
         <Footer />
