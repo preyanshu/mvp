@@ -148,7 +148,7 @@ const ComparisonTable: React.FC = () => {
         </motion.div>
 
         {/* Table */}
-        <div className="overflow-x-auto">
+        <div className="overflow-auto">
           <motion.div
             variants={containerVariants}
             // initial="hidden"
