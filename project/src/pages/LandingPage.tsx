@@ -28,7 +28,7 @@ export const LandingPage: React.FC = () => {
             <Hero />
             <Features />
             <ComparisonTable />
-            {/* <FAQ /> */}
+            <FAQ />
             <WaitlistForm />
           </motion.div>
         </main>
