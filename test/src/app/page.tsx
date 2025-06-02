@@ -2,8 +2,7 @@
 
 import React from "react";
 
-// @ts-ignore
-
+// @ts-expect-error   /drgjkerngjurgnertugrtne
 import Faq from "react-faq-component";
 
 const data = {
