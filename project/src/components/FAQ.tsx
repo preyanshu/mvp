@@ -24,11 +24,13 @@ function ResponsiveAnimatedContent({ answer }:any) {
 
   const transition = { duration: 0.5, ease: 'easeInOut' };
 
+  console.log(isMobile)
+
   const animationProps = isMobile
     ? {
-        initial: { opacity: 0, scaleY: 0 },
-        animate: { opacity: 1, scaleY: 1 },
-        exit: { opacity: 0, scaleY: 0 },
+        initial: { scaleY: 0 },
+        animate: {  scaleY: 1 },
+        exit: {  scaleY: 0 },
         transition: {
           opacity: transition,
           scaleY: transition,
@@ -37,9 +39,9 @@ function ResponsiveAnimatedContent({ answer }:any) {
         className: 'overflow-hidden',
       }
     : {
-        initial: { opacity: 0, height: 0 },
-        animate: { opacity: 1, height: 'auto' },
-        exit: { opacity: 0, height: 0 },
+        initial: {  height: 0 },
+        animate: {  height: 'auto' },
+        exit: {  height: 0 },
         transition: {
           opacity: transition,
           height: transition,
@@ -108,7 +110,7 @@ const FAQ: React.FC = () => {
   const faqs = [
     {
       question: "How does ChainPay ensure payment security?",
-      answer: "ChainPay leverages blockchain technology for secure, transparent transactions..."
+      answer: "ChainPay leverages blockchain technology for secure, transparent transactions..ChainPay leverages blockchain technology for secure, transparent transactions...ChainPay leverages blockchain technology for secure, transparent transactions...ChainPay leverages blockchain technology for secure, transparent transactions...ChainPay leverages blockchain technology for secure, transparent transactions...ChainPay leverages blockchain technology for secure, transparent transactions...ChainPay leverages blockchain technology for secure, transparent transactions...."
     },
     {
       question: "What cryptocurrencies are supported?",
