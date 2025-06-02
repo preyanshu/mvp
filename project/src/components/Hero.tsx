@@ -17,16 +17,15 @@ const Hero: React.FC = () => {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [1, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.85]);
 
   const titleY = useTransform(textScrollProgress, [0, 1], [100, -100]);
   const titleOpacity = useTransform(textScrollProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   const container = {
-    hidden: { opacity: 0 },
     show: {
-      opacity: 1,
+    
       transition: {
         staggerChildren: 0.2,
         delayChildren: 0.3,
@@ -36,9 +35,8 @@ const Hero: React.FC = () => {
   };
 
   const item = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: {  y: 24 },
     show: {
-      opacity: 1,
       y: 0,
       transition: {
         duration: 1,
@@ -134,9 +132,9 @@ const Hero: React.FC = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+            initial={{  scale: 0.95 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
             style={{ scale }}
             className="relative"
           >
@@ -144,7 +142,7 @@ const Hero: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1, ease: "easeInOut" }}
+                transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
                 className="bg-gradient-to-b from-dark-300 to-dark-100 rounded-2xl p-1"
               >
                 <div className="bg-dark-300 rounded-2xl overflow-hidden border border-dark-500 shadow-2xl">

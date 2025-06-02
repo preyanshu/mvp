@@ -35,8 +35,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, ind
     <motion.div
       ref={cardRef}
       style={{ y, opacity, scale }}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      initial={{  y: 30 }}
+      animate={isInView ? { y: 0 } : {}}
       transition={{
         duration: 0.6,
         delay: index * 0.1,

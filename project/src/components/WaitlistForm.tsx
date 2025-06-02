@@ -72,8 +72,8 @@ const WaitlistForm: React.FC = () => {
           </div>
 
           <motion.form 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : undefined}
+            initial={{  y: 20 }}
+            animate={isInView ? {  y: 0 } : undefined}
             transition={{ duration: 0.5, delay: 0.3 }}
             onSubmit={handleSubmit}
             className="max-w-md mx-auto"
