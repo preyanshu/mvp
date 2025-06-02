@@ -42,17 +42,21 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
 
       <AnimatePresence initial={false}>
         {isOpen && (
-        <motion.div
-        key="content"
-        initial={{ opacity: 0, scaleY: 0 }}
-        animate={{ opacity: 1, scaleY: 1 }}
-        exit={{ opacity: 0, scaleY: 0 }}
-        transition={{ duration: 0.2, ease: 'easeInOut' }}
-        className="origin-top overflow-hidden"
-        style={{ willChange: 'opacity, transform' }}
-      >
-        <p className="pb-5 text-gray-400">{answer}</p>
-      </motion.div>
+      <motion.div
+      key="content"
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      exit={{ opacity: 0, height:0 }}
+      transition={{
+        opacity: { duration: 0.2, ease: 'easeInOut' },
+        scaleY: { duration: 0.2, ease: 'easeInOut' }
+      }}
+      className=" overflow-hidden"
+      style={{ willChange: 'opacity, transform' }}
+    >
+      <p className="pb-5 text-gray-400">{answer}</p>
+    </motion.div>
+    
        
         )}
       </AnimatePresence>
@@ -61,7 +65,8 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
 };
 
 const FAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const [openIndexes, setOpenIndexes] = useState<number[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
@@ -132,8 +137,15 @@ const FAQ: React.FC = () => {
               key={index}
               question={faq.question}
               answer={faq.answer}
-              isOpen={openIndex === index}
-              onToggle={() => setOpenIndex(openIndex === index ? null : index)}
+              isOpen={openIndexes.includes(index)}
+
+              onToggle={() =>
+  setOpenIndexes((prev) =>
+    prev.includes(index)
+      ? prev.filter((i) => i !== index) // close if already open
+      : [...prev, index]               // open if not already open
+  )
+}
               index={index}
             />
           ))}
