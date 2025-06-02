@@ -152,4 +152,7 @@ const FAQ: React.FC = () => {
   );
 };
 
+
+FAQItem.displayName = 'FAQItem';
+
 export default FAQ;
