@@ -26,18 +26,7 @@ function ResponsiveAnimatedContent({ answer }:any) {
 
   console.log(isMobile)
 
-  const animationProps = isMobile
-    ? {
-        initial: { scaleY: 0 },
-        animate: {  scaleY: 1 },
-        // exit: {  scaleY: 0 },
-        transition: {
-          scaleY: { duration: 0.2, ease: 'easeInOut' },
-        },
-        style: { willChange: 'opacity, transform' },
-        className: 'overflow-hidden',
-      }
-    : {
+  const animationProps = {
         initial: {  height: 0 },
         animate: {  height: 'auto' },
         exit: {  height: 0 },
@@ -63,12 +52,12 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
   const isInView = useInView(itemRef, { once: true, margin: "-50px" });
 
   return (
-    <motion.div
+    <div
       ref={itemRef}
-      style={{ willChange: 'transform, opacity' }}
-      initial={{  y: 20 }}
-      animate={isInView ? {  y: 0 } : {}}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
+      style={{ willChange: 'transform' }}
+      // initial={{  y: 20 }}
+      // animate={isInView ? {  y: 0 } : {}}
+      // transition={{ duration: 0.4, delay: index * 0.08 }}
       className="border-b border-dark-400 last:border-none"
     >
       <button
@@ -96,7 +85,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
        
         
      
-    </motion.div>
+    </div>
   );
 };
 
@@ -143,11 +132,11 @@ const FAQ: React.FC = () => {
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Heading */}
-        <motion.div
+        <div 
           style={{ willChange: 'transform, opacity' }}
-          initial={{  y: 20 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          // initial={{  y: 20 }}
+          // animate={isInView ? { y: 0 } : {}}
+          // transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
           <div className="inline-block px-4 py-2 rounded-full bg-dark-300 text-primary-300 font-medium text-sm mb-3">
@@ -159,13 +148,13 @@ const FAQ: React.FC = () => {
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Everything you need to know about ChainPay and how it works.
           </p>
-        </motion.div>
+        </div>
 
         {/* FAQ List */}
-        <motion.div
+        <div
           style={{ willChange: 'transform, opacity' }}
         
-          transition={{ duration: 0.5, delay: 0.2 }}
+          // transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-dark-200 rounded-2xl p-8 border border-dark-300"
         >
           {faqs.map((faq, index) => (
@@ -185,7 +174,7 @@ const FAQ: React.FC = () => {
               index={index}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
