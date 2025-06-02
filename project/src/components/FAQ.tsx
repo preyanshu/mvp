@@ -18,8 +18,8 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
     <motion.div
       ref={itemRef}
       style={{ willChange: 'transform, opacity' }}
-      initial={{ opacity: 1, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      initial={{  y: 20 }}
+      animate={isInView ? {  y: 0 } : {}}
       transition={{ duration: 0.4, delay: index * 0.08 }}
       className="border-b border-dark-400 last:border-none"
     >
@@ -44,9 +44,9 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
         {isOpen && (
           <motion.div
             key="content"
-            initial={{ height: 0, opacity: 1 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{ height: 0 }}
+            animate={{ height: 'auto' }}
+            exit={{ height: 0}}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden will-change-transform"
           >
@@ -102,8 +102,8 @@ const FAQ: React.FC = () => {
         {/* Heading */}
         <motion.div
           style={{ willChange: 'transform, opacity' }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{  y: 20 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
