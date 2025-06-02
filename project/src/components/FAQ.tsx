@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState ,useEffect} from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 
@@ -9,6 +9,53 @@ interface FAQItemProps {
   onToggle: () => void;
   index: number;
 }
+function ResponsiveAnimatedContent({ answer }:any) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)'); // Tailwind md breakpoint
+    setIsMobile(mediaQuery.matches);
+
+    const handler = (e:any) => setIsMobile(e.matches);
+    mediaQuery.addEventListener('change', handler);
+
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  const transition = { duration: 0.5, ease: 'easeInOut' };
+
+  const animationProps = isMobile
+    ? {
+        initial: { opacity: 0, scaleY: 0 },
+        animate: { opacity: 1, scaleY: 1 },
+        exit: { opacity: 0, scaleY: 0 },
+        transition: {
+          opacity: transition,
+          scaleY: transition,
+        },
+        style: { willChange: 'opacity, transform' },
+        className: 'overflow-hidden',
+      }
+    : {
+        initial: { opacity: 0, height: 0 },
+        animate: { opacity: 1, height: 'auto' },
+        exit: { opacity: 0, height: 0 },
+        transition: {
+          opacity: transition,
+          height: transition,
+        },
+        style: { willChange: 'opacity, height' },
+        className: 'overflow-hidden',
+      };
+
+  return (
+    <motion.div key="content" {...animationProps}>
+      <p className="pb-5 text-gray-400">{answer}</p>
+    </motion.div>
+  );
+}
+
+
 
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, index }) => {
   const itemRef = useRef<HTMLDivElement>(null);
@@ -40,26 +87,14 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
         </motion.div>
       </button>
 
+       
       <AnimatePresence initial={false}>
-        {isOpen && (
-      <motion.div
-      key="content"
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: "auto" }}
-      exit={{ opacity: 0, height:0 }}
-      transition={{
-        opacity: { duration: 0.2, ease: 'easeInOut' },
-        scaleY: { duration: 0.2, ease: 'easeInOut' }
-      }}
-      className=" overflow-hidden"
-      style={{ willChange: 'opacity, transform' }}
-    >
-      <p className="pb-5 text-gray-400">{answer}</p>
-    </motion.div>
+  {isOpen && answer && <ResponsiveAnimatedContent answer={answer} />}
+</AnimatePresence>
     
        
-        )}
-      </AnimatePresence>
+        
+     
     </motion.div>
   );
 };
