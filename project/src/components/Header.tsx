@@ -87,32 +87,37 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-dark-200 mt-4 rounded-lg overflow-hidden"
+  {isOpen && (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.3 }}
+      className="md:hidden mt-4 rounded-lg overflow-hidden"
+      style={{
+        backgroundColor,
+        backdropFilter,
+        WebkitBackdropFilter: backdropFilter, // for Safari support
+      }}
+    >
+      <div className="px-4 py-4 flex flex-col space-y-4">
+        {menuItems.map((item) => (
+          <a
+            key={item}
+            href={`#${item.toLowerCase()}`}
+            className="text-gray-300 hover:text-white py-2 text-lg"
+            onClick={() => setIsOpen(false)}
           >
-            <div className="px-4 py-4 flex flex-col space-y-4">
-              {menuItems.map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-gray-300 hover:text-white py-2 text-lg"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item}
-                </a>
-              ))}
-              <button className="mt-2 px-5 py-3 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium">
-                Join Waitlist
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {item}
+          </a>
+        ))}
+        <button className="mt-2 px-5 py-3 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium">
+          Join Waitlist
+        </button>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </motion.header>
   );
 };

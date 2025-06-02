@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 
@@ -17,39 +17,40 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
   return (
     <motion.div
       ref={itemRef}
+      style={{ willChange: 'transform, opacity' }}
       initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
       className="border-b border-dark-400 last:border-none"
     >
-      <motion.button
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
+      <button
         onClick={onToggle}
-        className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
+        className="w-full py-5 flex items-center justify-between text-left focus:outline-none group transition-transform duration-200"
       >
         <span className="text-lg font-medium text-white group-hover:text-primary-400 transition-colors">
           {question}
         </span>
         <motion.div
-          initial={false}
+          style={{ willChange: 'transform' }}
           animate={{ rotate: isOpen ? 45 : 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
           className="text-primary-400 flex-shrink-0 ml-4"
         >
           {isOpen ? <Minus size={20} /> : <Plus size={20} />}
         </motion.div>
-      </motion.button>
-      
-      <AnimatePresence>
+      </button>
+
+      <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
+            key="content"
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
+            animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden will-change-transform"
           >
-            <p className="pb-6 text-gray-400">{answer}</p>
+            <p className="pb-5 text-gray-400">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -58,81 +59,71 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onToggle, i
 };
 
 const FAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = React.useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   const faqs = [
     {
       question: "How does ChainPay ensure payment security?",
-      answer: "ChainPay leverages blockchain technology for secure, transparent transactions. All payments are verified on-chain, and smart contracts ensure automatic code/service release only after payment confirmation."
+      answer: "ChainPay leverages blockchain technology for secure, transparent transactions..."
     },
     {
       question: "What cryptocurrencies are supported?",
-      answer: "We support a wide range of cryptocurrencies, including major stablecoins (USDC, USDT, DAI) and native tokens (ETH, BNB, MATIC). The platform automatically handles currency conversion and verification."
+      answer: "We support a wide range of cryptocurrencies..."
     },
     {
       question: "How are payment disputes handled?",
-      answer: "Our platform includes built-in dispute resolution mechanisms. While we promote direct peer-to-peer transactions, we maintain optional escrow services for high-value deals and provide detailed transaction tracking for transparency."
+      answer: "Our platform includes built-in dispute resolution mechanisms..."
     },
     {
       question: "Can I customize payment terms and conditions?",
-      answer: "Yes! You can set custom payment schedules, milestone-based releases, and specific terms for each client. Our platform supports flexible payment structures while maintaining automated tracking and notifications."
+      answer: "Yes! You can set custom payment schedules and milestone-based releases..."
     },
     {
       question: "What happens if a client misses a payment deadline?",
-      answer: "ChainPay automatically sends reminder notifications based on your custom schedule. You can set up escalating reminder frequencies and customize the messaging tone. The system also provides payment status tracking and analytics."
+      answer: "ChainPay automatically sends reminder notifications..."
     }
   ];
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="faq" 
+      id="faq"
       className="py-24 px-6 relative overflow-hidden"
     >
+      {/* Background blur lights */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-primary-500/10 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10">
+        {/* Heading */}
         <motion.div
+          style={{ willChange: 'transform, opacity' }}
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <motion.span 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-2 rounded-full bg-dark-300 text-primary-300 font-medium text-sm mb-4"
-          >
+          <div className="inline-block px-4 py-2 rounded-full bg-dark-300 text-primary-300 font-medium text-sm mb-3">
             FAQ
-          </motion.span>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-          >
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             Frequently Asked Questions
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-gray-400 max-w-2xl mx-auto"
-          >
+          </h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Everything you need to know about ChainPay and how it works.
-          </motion.p>
+          </p>
         </motion.div>
 
+        {/* FAQ List */}
         <motion.div
+          style={{ willChange: 'transform, opacity' }}
           initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-dark-200 rounded-2xl p-8 border border-dark-300"
         >
           {faqs.map((faq, index) => (

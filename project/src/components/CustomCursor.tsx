@@ -3,19 +3,25 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const CustomCursor: React.FC = () => {
   const [isPointer, setIsPointer] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Motion values for cursor position
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // Use a faster spring for cursor position for less lag
   const springConfig = { damping: 18, stiffness: 250 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    const isMobileDevice = () =>
+      typeof window !== 'undefined' &&
+      ('ontouchstart' in window || window.innerWidth < 768);
+
+    setIsMobile(isMobileDevice());
+
+    if (isMobileDevice()) return; // Skip cursor setup on mobile
+
     const moveCursor = (e: MouseEvent) => {
-      // Move cursor immediately without offset lag
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
     };
@@ -38,6 +44,8 @@ const CustomCursor: React.FC = () => {
       window.removeEventListener('mouseover', updateCursorType);
     };
   }, [cursorX, cursorY]);
+
+  if (isMobile) return null;
 
   return (
     <>
