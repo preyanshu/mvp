@@ -30,10 +30,9 @@ function ResponsiveAnimatedContent({ answer }:any) {
     ? {
         initial: { scaleY: 0 },
         animate: {  scaleY: 1 },
-        exit: {  scaleY: 0 },
+        // exit: {  scaleY: 0 },
         transition: {
-          opacity: transition,
-          scaleY: transition,
+          scaleY: { duration: 0.2, ease: 'easeInOut' },
         },
         style: { willChange: 'opacity, transform' },
         className: 'overflow-hidden',
