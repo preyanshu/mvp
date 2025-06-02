@@ -1,87 +1,47 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 
-interface FAQItemProps {
+interface FAQItem {
   question: string;
   answer: string;
-  isOpen: boolean;
-  onToggle: () => void;
 }
 
-const FAQItem: React.FC<FAQItemProps> = React.memo(({ question, answer, isOpen, onToggle }) => {
-  return (
-    <div className="border-b border-gray-700 last:border-none">
-      <button
-        onClick={onToggle}
-        className="w-full py-4 flex items-center justify-between text-left focus:outline-none active:bg-dark-200"
-        style={{ WebkitTapHighlightColor: 'transparent' }}
-      >
-        <span className="text-base md:text-lg font-medium text-white pr-4">
-          {question}
-        </span>
-        <div 
-          className="text-primary-300 flex-shrink-0 transition-transform duration-200 ease-out"
-          style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}
-        >
-          {isOpen ? <Minus size={18} /> : <Plus size={18} />}
-        </div>
-      </button>
-
-      <div 
-        className="overflow-hidden transition-all duration-300 ease-out"
-        style={{ 
-          maxHeight: isOpen ? '500px' : '0px',
-          opacity: isOpen ? 1 : 0
-        }}
-      >
-        <div className="pb-4 pr-8">
-          <p className="text-gray-400 text-sm md:text-base leading-relaxed">{answer}</p>
-        </div>
-      </div>
-    </div>
-  );
-});
-
 const FAQ: React.FC = () => {
-  const [openIndexes, setOpenIndexes] = useState<number[]>([]);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const faqs = [
+  const faqs: FAQItem[] = [
     {
       question: "How does ChainPay ensure payment security?",
-      answer: "ChainPay leverages blockchain technology for secure, transparent transactions. Our smart contracts are audited and tested to ensure maximum security for all parties involved in the payment process."
+      answer: "ChainPay leverages blockchain technology for secure, transparent transactions. Our smart contracts are audited and tested to ensure maximum security for all parties involved in the payment process.",
     },
     {
       question: "What cryptocurrencies are supported?",
-      answer: "We support a wide range of cryptocurrencies including Bitcoin, Ethereum, USDC, USDT, and many other popular tokens across multiple blockchain networks."
+      answer: "We support a wide range of cryptocurrencies including Bitcoin, Ethereum, USDC, USDT, and many other popular tokens across multiple blockchain networks.",
     },
     {
       question: "How are payment disputes handled?",
-      answer: "Our platform includes built-in dispute resolution mechanisms with automated arbitration and manual review processes to ensure fair outcomes for all parties."
+      answer: "Our platform includes built-in dispute resolution mechanisms with automated arbitration and manual review processes to ensure fair outcomes for all parties.",
     },
     {
       question: "Can I customize payment terms and conditions?",
-      answer: "Yes! You can set custom payment schedules, milestone-based releases, and define specific terms that work best for your business needs."
+      answer: "Yes! You can set custom payment schedules, milestone-based releases, and define specific terms that work best for your business needs.",
     },
     {
       question: "What happens if a client misses a payment deadline?",
-      answer: "ChainPay automatically sends reminder notifications and can trigger predefined actions like late fees or contract modifications based on your settings."
-    }
+      answer: "ChainPay automatically sends reminder notifications and can trigger predefined actions like late fees or contract modifications based on your settings.",
+    },
   ];
 
-  const handleToggle = useCallback((index: number) => {
-    setOpenIndexes((prev) =>
-      prev.includes(index)
-        ? prev.filter((i) => i !== index)
-        : [...prev, index]
-    );
-  }, []);
+  const toggleAccordion = (index: number) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6 ">
+    <section className="py-16 md:py-24 px-4 md:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10 md:mb-14">
-          <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-dark-300 text-primary-300 font-medium text-sm md:text-sm mb-3">
+          <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-dark-300 text-primary-300 font-medium text-sm mb-3">
             FAQ
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-white">
@@ -92,16 +52,28 @@ const FAQ: React.FC = () => {
           </p>
         </div>
 
-        {/* FAQ List */}
-        <div className="bg-dark-200 rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 border border-gray-700/50">
+        {/* Accordion */}
+        <div className="bg-dark-200 rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 border border-gray-700/50 divide-y divide-gray-700/50">
           {faqs.map((faq, index) => (
-            <FAQItem
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-              isOpen={openIndexes.includes(index)}
-              onToggle={() => handleToggle(index)}
-            />
+            <div key={index} className="py-4">
+              <button
+                onClick={() => toggleAccordion(index)}
+                className="w-full flex justify-between items-center py-2 text-white text-left focus:outline-none"
+              >
+                <span className="text-base md:text-lg font-medium pr-4">{faq.question}</span>
+                <span className="transition-transform duration-300 text-primary-300">
+                  {openIndex === index ? <Minus size={18} /> : <Plus size={18} />}
+                </span>
+              </button>
+
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out text-gray-400 text-sm md:text-base leading-relaxed pr-8 ${
+                  openIndex === index ? 'max-h-[500px] mt-2 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                {faq.answer}
+              </div>
+            </div>
           ))}
         </div>
       </div>
