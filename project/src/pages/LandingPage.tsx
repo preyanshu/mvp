@@ -13,23 +13,23 @@ import CustomCursor from '../components/CustomCursor';
 export const LandingPage: React.FC = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <CustomCursor />
-      <BackgroundGradient />
+      {/* <CustomCursor /> */}
+      {/* <BackgroundGradient /> */}
       
       <div className="relative z-10">
-        <Header />
+        {/* <Header /> */}
         
         <main>
           
-            <Hero />
+            {/* <Hero />
             <Features />
-            <ComparisonTable />/
+            <ComparisonTable />/ */}
             <FAQ />
-            <WaitlistForm />
+            {/* <WaitlistForm /> */}
 
         </main>
         
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );
